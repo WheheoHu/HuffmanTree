@@ -14,5 +14,8 @@
 using namespace std;
 
 int main() {
-
+	HuffmanTreeNode<int> *Hnodetest = new HuffmanTreeNode<int>(123, 1);
+	cout << Hnodetest->getdata() << endl;
+	cout << Hnodetest->getweight() << endl;
+	system("pause");
 }
