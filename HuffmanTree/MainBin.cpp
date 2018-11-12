@@ -32,7 +32,7 @@ int main() {
 		inputfile >> hfmweight[i];
 	}
 	HuffmanTree<char> huffmantree(SIZEOFCODE,hfmchar,hfmweight);
-
+	//huffmantree.treetoFile(hfmtree);
 	inputfile.close();
 	hfmtree.close();
 	system("pause");

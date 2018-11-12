@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include <fstream>
 #include <string>
 #include <deque>
 #include <algorithm>
@@ -45,7 +45,7 @@ class HuffmanTree
 {
 public:
 	HuffmanTree(int num_node, const T *hfmchar, const  int* hfmweight);
-
+	void treetoFile(fstream hfmtreefile);
 private:
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//在类内声明比较函数需要静态!!
@@ -53,6 +53,8 @@ private:
 	static bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
 		return (treea->getweight()) < (treeb->getweight());
 	}
+	void treetoFile(HuffmanTreeNode<T> *cnode, fstream hfmtreefile);
+	
 	deque<HuffmanTreeNode<T> *> hfmforest;
 	HuffmanTreeNode<T> *root;
 
@@ -68,8 +70,6 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		hfmforest.push_front(ptr);
 	}
 	//建立HuffmanTree
-
-
 	for (int i = 0; i < hfmforest.size(); i++)
 	{
 		//cout << hfmforest[i] << " " << hfmforest[i]->getdata() << " " << hfmforest[i]->getweight() << endl;
@@ -86,4 +86,31 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		hfmforest.push_back(pnewNode);
 	}
 	root = hfmforest.front();
+
+
 }
+
+template<class T>
+inline void HuffmanTree<T>::treetoFile(fstream hfmtreefile)
+{
+	treetoFile(root, hfmtreefile);
+}
+
+template<class T>
+inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream hfmtreefile)
+{
+	if (cnode==NULL)
+	{
+		exit;
+	}
+	else
+	{
+		hfmtreefile >> cnode->getdata() >> " " >> cnode->getweight;
+		treetoFile(cnode->plchild,hfmtreefile);
+		treetoFile(cnode->prchild, hfmtreefile);
+	}
+}
+
+
+
+
