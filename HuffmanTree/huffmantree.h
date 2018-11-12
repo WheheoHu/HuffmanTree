@@ -19,9 +19,6 @@ public:
 	HuffmanTreeNode(T d, int w) :pparent(NULL), plchild(NULL), prchild(NULL), data(d), weight(w) {}
 	T getdata()const;
 	int getweight()const;
-	bool operator<(const HuffmanTreeNode<T> &mt) {
-		return this->getweight() < mt.getweight();
-	}
 private:
 
 	HuffmanTreeNode<T> *pparent, *plchild, *prchild;
@@ -48,11 +45,14 @@ class HuffmanTree
 {
 public:
 	HuffmanTree(int num_node, const T *hfmchar, const  int* hfmweight);
-	/*bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
-		return (treea->getweight()) < (treeb->getweight());
-	}*/
-private:
 
+private:
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//在类内声明比较函数需要静态!!
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!
+	static bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
+		return (treea->getweight()) < (treeb->getweight());
+	}
 	deque<HuffmanTreeNode<T> *> hfmforest;
 	HuffmanTreeNode<T> *root;
 
@@ -68,12 +68,12 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		hfmforest.push_front(ptr);
 	}
 	//建立HuffmanTree
-	
-	sort(hfmforest.begin(), hfmforest.end());
+
+
 	for (int i = 0; i < hfmforest.size(); i++)
 	{
-		cout << hfmforest[i] <<" "<< hfmforest[i]->getdata() <<" "<< hfmforest[i]->getweight()<<endl;
-		/*sort(hfmforest.begin(), hfmforest.end());
+		//cout << hfmforest[i] << " " << hfmforest[i]->getdata() << " " << hfmforest[i]->getweight() << endl;
+		sort(hfmforest.begin(), hfmforest.end(), compare);
 
 		HuffmanTreeNode<T> *pnewNode = new HuffmanTreeNode<T>();
 		pnewNode->weight = hfmforest.at(0)->getweight() + hfmforest.at(1)->getweight();
@@ -83,8 +83,7 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		pnewNode->prchild = hfmforest.at(1);
 		hfmforest.pop_front();
 		hfmforest.pop_front();
-		hfmforest.push_back(pnewNode);*/
+		hfmforest.push_back(pnewNode);
 	}
-	/*root = hfmforest.front();
-	cout << root->weight << endl;*/
+	root = hfmforest.front();
 }
