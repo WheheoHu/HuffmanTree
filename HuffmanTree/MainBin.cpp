@@ -17,9 +17,10 @@ using namespace std;
 
 int main() {
 	fstream inputfile, hfmtree;
-	hfmtree.open("hfmtree", ios::out);
 	inputfile.open("input", ios::in);
-
+	hfmtree.open("hfmtree", ios::out);
+	
+	//ÊäÈë
 	int SIZEOFCODE = 0;
 	inputfile >> SIZEOFCODE;
 	char *hfmchar = new char[SIZEOFCODE];
@@ -30,18 +31,9 @@ int main() {
 		inputfile >> hfmchar[i];
 		inputfile >> hfmweight[i];
 	}
+	HuffmanTree<char> huffmantree(SIZEOFCODE,hfmchar,hfmweight);
 
-	for (int i = 0; i < SIZEOFCODE; i++)
-	{
-		cout << hfmchar[i] << " ";
-	}
-	cout << endl;
-	for (int i = 0; i < SIZEOFCODE; i++)
-	{
-		cout << hfmweight[i] << " ";
-	}
-	cout << endl;
-
+	inputfile.close();
 	hfmtree.close();
 	system("pause");
 	return EXIT_SUCCESS;

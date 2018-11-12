@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
-
+#include <deque>
+#include <algorithm>
+#include <functional>
 using namespace std;
 
 template<class T> class HuffmanTreeNode;
@@ -13,12 +15,13 @@ class HuffmanTreeNode
 {
 public:
 	friend class HuffmanTree<T>;
-	HuffmanTreeNode() :pparent(NULL), plchild(NULL), prchild(NULL) {}
+	HuffmanTreeNode() :data(0), pparent(NULL), plchild(NULL), prchild(NULL) {}
 	HuffmanTreeNode(T d, int w) :pparent(NULL), plchild(NULL), prchild(NULL), data(d), weight(w) {}
 	T getdata()const;
 	int getweight()const;
 
 private:
+
 	HuffmanTreeNode<T> *pparent, *plchild, *prchild;
 	T data;
 	int weight;
@@ -37,11 +40,50 @@ inline int HuffmanTreeNode<T>::getweight() const
 }
 
 
+
 template<class T>
 class HuffmanTree
 {
 public:
-
+	friend class HuffmanTreeNode<T>;
+	HuffmanTree(int num_node, const T *hfmchar, const  int* hfmweight);
+	/*bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
+		return (treea->getweight()) < (treeb->getweight());
+	}*/
 private:
 
+	deque<HuffmanTreeNode<T> *> hfmforest;
+	HuffmanTreeNode<T> *root;
+
 };
+
+template<class T>
+inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * hfmweight)
+{
+	//将数据存入结点森林
+	for (int i = 0; i < num_node; i++)
+	{
+		HuffmanTreeNode<T> *ptr = new HuffmanTreeNode<T>(hfmchar[i], hfmweight[i]);
+		hfmforest.push_front(ptr);
+	}
+	//建立HuffmanTree
+	
+	sort(hfmforest.begin(), hfmforest.end());
+	for (int i = 0; i < hfmforest.size(); i++)
+	{
+		cout << hfmforest[i]->getdata() << endl;
+		/*sort(hfmforest.begin(), hfmforest.end());
+
+		HuffmanTreeNode<T> *pnewNode = new HuffmanTreeNode<T>();
+		pnewNode->weight = hfmforest.at(0)->getweight() + hfmforest.at(1)->getweight();
+		hfmforest.at(0)->pparent = pnewNode;
+		hfmforest.at(1)->pparent = pnewNode;
+		pnewNode->plchild = hfmforest.at(0);
+		pnewNode->prchild = hfmforest.at(1);
+		hfmforest.pop_front();
+		hfmforest.pop_front();
+		hfmforest.push_back(pnewNode);*/
+	}
+	/*root = hfmforest.front();
+	cout << root->weight << endl;*/
+}
