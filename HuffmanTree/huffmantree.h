@@ -4,6 +4,10 @@
 
 using namespace std;
 
+template<class T> class HuffmanTreeNode;
+template<class T> class HuffmanTree;
+
+
 template<class T>
 class HuffmanTreeNode
 {

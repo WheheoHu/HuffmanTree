@@ -9,13 +9,19 @@
 //每次执行中不一定执行 I 命令，因为文件 hfmtree 可能早已建好。
 
 #include <fstream>
+#include <deque>
 #include "huffmantree.h"
 
 using namespace std;
 
+
 int main() {
-	HuffmanTreeNode<int> *Hnodetest = new HuffmanTreeNode<int>(123, 1);
-	cout << Hnodetest->getdata() << endl;
-	cout << Hnodetest->getweight() << endl;
+	fstream hfmtree;
+	hfmtree.open("hfmtree", ios::out);
+
+
+
+	hfmtree.close();
 	system("pause");
+	return EXIT_SUCCESS;
 }
