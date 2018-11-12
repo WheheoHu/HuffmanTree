@@ -12,6 +12,7 @@ template<class T>
 class HuffmanTreeNode
 {
 public:
+	friend class HuffmanTree<T>;
 	HuffmanTreeNode() :pparent(NULL), plchild(NULL), prchild(NULL) {}
 	HuffmanTreeNode(T d, int w) :pparent(NULL), plchild(NULL), prchild(NULL), data(d), weight(w) {}
 	T getdata()const;
@@ -34,3 +35,13 @@ inline int HuffmanTreeNode<T>::getweight() const
 {
 	return this->weight;
 }
+
+
+template<class T>
+class HuffmanTree
+{
+public:
+
+private:
+
+};

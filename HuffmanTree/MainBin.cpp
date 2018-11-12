@@ -31,6 +31,16 @@ int main() {
 		inputfile >> hfmweight[i];
 	}
 
+	for (int i = 0; i < SIZEOFCODE; i++)
+	{
+		cout << hfmchar[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < SIZEOFCODE; i++)
+	{
+		cout << hfmweight[i] << " ";
+	}
+	cout << endl;
 
 	hfmtree.close();
 	system("pause");
