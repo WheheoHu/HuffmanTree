@@ -16,9 +16,20 @@ using namespace std;
 
 
 int main() {
-	fstream hfmtree;
+	fstream inputfile, hfmtree;
 	hfmtree.open("hfmtree", ios::out);
+	inputfile.open("input", ios::in);
 
+	int SIZEOFCODE = 0;
+	inputfile >> SIZEOFCODE;
+	char *hfmchar = new char[SIZEOFCODE];
+	int *hfmweight = new int[SIZEOFCODE];
+
+	for (int i = 0; i < SIZEOFCODE; i++)
+	{
+		inputfile >> hfmchar[i];
+		inputfile >> hfmweight[i];
+	}
 
 
 	hfmtree.close();
