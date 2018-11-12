@@ -19,7 +19,9 @@ public:
 	HuffmanTreeNode(T d, int w) :pparent(NULL), plchild(NULL), prchild(NULL), data(d), weight(w) {}
 	T getdata()const;
 	int getweight()const;
-
+	bool operator<(const HuffmanTreeNode<T> &mt) {
+		return this->getweight() < mt.getweight();
+	}
 private:
 
 	HuffmanTreeNode<T> *pparent, *plchild, *prchild;
@@ -45,7 +47,6 @@ template<class T>
 class HuffmanTree
 {
 public:
-	friend class HuffmanTreeNode<T>;
 	HuffmanTree(int num_node, const T *hfmchar, const  int* hfmweight);
 	/*bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
 		return (treea->getweight()) < (treeb->getweight());
@@ -71,7 +72,7 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 	sort(hfmforest.begin(), hfmforest.end());
 	for (int i = 0; i < hfmforest.size(); i++)
 	{
-		cout << hfmforest[i]->getdata() << endl;
+		cout << hfmforest[i] <<" "<< hfmforest[i]->getdata() <<" "<< hfmforest[i]->getweight()<<endl;
 		/*sort(hfmforest.begin(), hfmforest.end());
 
 		HuffmanTreeNode<T> *pnewNode = new HuffmanTreeNode<T>();
