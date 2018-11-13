@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <deque>
 #include <algorithm>
@@ -45,7 +46,7 @@ class HuffmanTree
 {
 public:
 	HuffmanTree(int num_node, const T *hfmchar, const  int* hfmweight);
-	void treetoFile(fstream hfmtreefile);
+	void treetoFile(fstream &hfmtreefile);
 private:
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//在类内声明比较函数需要静态!!
@@ -53,7 +54,7 @@ private:
 	static bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
 		return (treea->getweight()) < (treeb->getweight());
 	}
-	void treetoFile(HuffmanTreeNode<T> *cnode, fstream hfmtreefile);
+	void treetoFile(HuffmanTreeNode<T> *cnode, fstream &hfmtreefile);
 	
 	deque<HuffmanTreeNode<T> *> hfmforest;
 	HuffmanTreeNode<T> *root;
@@ -70,7 +71,7 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		hfmforest.push_front(ptr);
 	}
 	//建立HuffmanTree
-	for (int i = 0; i < hfmforest.size(); i++)
+	while(hfmforest.size()>1)
 	{
 		//cout << hfmforest[i] << " " << hfmforest[i]->getdata() << " " << hfmforest[i]->getweight() << endl;
 		sort(hfmforest.begin(), hfmforest.end(), compare);
@@ -86,18 +87,18 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		hfmforest.push_back(pnewNode);
 	}
 	root = hfmforest.front();
-
+	cout << root->getweight() << endl;
 
 }
 
 template<class T>
-inline void HuffmanTree<T>::treetoFile(fstream hfmtreefile)
+inline void HuffmanTree<T>::treetoFile(fstream &hfmtreefile)
 {
 	treetoFile(root, hfmtreefile);
 }
 
 template<class T>
-inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream hfmtreefile)
+inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream &hfmtreefile)
 {
 	if (cnode==NULL)
 	{
@@ -105,7 +106,7 @@ inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream hfmtre
 	}
 	else
 	{
-		hfmtreefile >> cnode->getdata() >> " " >> cnode->getweight;
+		hfmtreefile << cnode->getdata() << " " << cnode->getweight()<<endl;
 		treetoFile(cnode->plchild,hfmtreefile);
 		treetoFile(cnode->prchild, hfmtreefile);
 	}
