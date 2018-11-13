@@ -11,7 +11,7 @@ using namespace std;
 template<class T> class HuffmanTreeNode;
 template<class T> class HuffmanTree;
 
-
+//HuffmanTreeNode为结点类
 template<class T>
 class HuffmanTreeNode
 {
@@ -41,7 +41,7 @@ inline int HuffmanTreeNode<T>::getweight() const
 }
 
 
-
+//HuffmanTree类以及相关操作
 template<class T>
 class HuffmanTree
 {

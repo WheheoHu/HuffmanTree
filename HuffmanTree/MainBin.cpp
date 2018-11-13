@@ -15,8 +15,8 @@ using namespace std;
 
 
 int main() {
+	//准备文件
 	fstream inputfile, tobetrans, hfmtree, hfmcode, codefile,textfile;
-	
 	inputfile.open("input", ios::in);
 	tobetrans.open("tobetrans", ios::in);
 	hfmtree.open("hfmtree", ios::out);
@@ -35,14 +35,22 @@ int main() {
 		inputfile >> hfmweight[i];
 	}
 
-	//j建立HuffmanTree
+	//建立HuffmanTree
 	HuffmanTree<char> huffmantree(SIZEOFCODE, hfmchar, hfmweight);
-	huffmantree.treetoFile(hfmtree);
-	huffmantree.treetoCode(hfmcode);
-	huffmantree.Encode(tobetrans, codefile);
+
+	/*=================================
+	输出文件默认在工程文件路径下
+
+	建立HuffmanTree时默认将树存入内存
+	==================================*/
+
+	huffmantree.treetoFile(hfmtree);//将HuffmanTree根据前序输出至文件hfmtree
+	huffmantree.treetoCode(hfmcode);//将各个字符的HuffmanCode输出至文件hfmcode
+
+	huffmantree.Encode(tobetrans, codefile);//编码文件tobetrans存入codefile中
 	codefile.close();
 	codefile.open("codefile", ios::in);
-	huffmantree.Decode(codefile, textfile);
+	huffmantree.Decode(codefile, textfile);//从codefile解码得到文字存入textfile
 
 
 	//收尾
