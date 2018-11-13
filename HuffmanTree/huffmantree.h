@@ -124,7 +124,7 @@ inline void HuffmanTree<T>::Encode(fstream & tobetrans, fstream & codefile)
 
 	map<char, string>::iterator itr;
 
-	for (int i = 0; i < str.size(); i++)
+	for (unsigned int i = 0; i < str.size(); i++)
 	{
 		for (itr = codes.begin(); itr != codes.end(); ++itr)
 		{
@@ -144,7 +144,7 @@ inline void HuffmanTree<T>::Decode(istream & codefilein, fstream & textfile)
 	codefilein >> str;
 	string ans = "";
 	HuffmanTreeNode<T> *p = root;
-	for (int i = 0; i < str.size(); i++)
+	for (unsigned int i = 0; i < str.size(); i++)
 	{
 
 
