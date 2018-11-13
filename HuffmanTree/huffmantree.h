@@ -102,7 +102,7 @@ inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream &hfmtr
 {
 	if (cnode==NULL)
 	{
-		exit;
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{

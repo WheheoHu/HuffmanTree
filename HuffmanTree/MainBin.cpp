@@ -25,12 +25,12 @@ int main() {
 	inputfile >> SIZEOFCODE;
 	char *hfmchar = new char[SIZEOFCODE];
 	int *hfmweight = new int[SIZEOFCODE];
-
 	for (int i = 0; i < SIZEOFCODE; i++)
 	{
 		inputfile >> hfmchar[i];
 		inputfile >> hfmweight[i];
 	}
+	//j½¨Á¢HuffmanTree
 	HuffmanTree<char> huffmantree(SIZEOFCODE,hfmchar,hfmweight);
 	huffmantree.treetoFile(hfmtree);
 	inputfile.close();
