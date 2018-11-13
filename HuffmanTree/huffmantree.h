@@ -52,6 +52,7 @@ public:
 private:
 	deque<HuffmanTreeNode<T> *> hfmforest;
 	HuffmanTreeNode<T> *root;
+
 private:
 
 	void treetoFile(HuffmanTreeNode<T> *cnode, fstream &hfmtreefile);

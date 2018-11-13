@@ -16,8 +16,10 @@ using namespace std;
 
 
 int main() {
-	fstream inputfile, hfmtree, hfmcode;
+	fstream inputfile, tobetrans,hfmtree, hfmcode;
+	
 	inputfile.open("input", ios::in);
+	tobetrans.open("tobetrans", ios::in);
 	hfmtree.open("hfmtree", ios::out);
 	hfmcode.open("hfmcode", ios::out);
 
@@ -43,6 +45,7 @@ int main() {
 	//สีฮฒ
 
 	inputfile.close();
+	tobetrans.close();
 	hfmtree.close();
 	hfmcode.close();
 	//system("pause");
