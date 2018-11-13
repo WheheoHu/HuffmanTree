@@ -16,10 +16,11 @@ using namespace std;
 
 
 int main() {
-	fstream inputfile, hfmtree;
+	fstream inputfile, hfmtree, hfmcode;
 	inputfile.open("input", ios::in);
 	hfmtree.open("hfmtree", ios::out);
-	
+	hfmcode.open("hfmcode", ios::out);
+
 	//输入
 	int SIZEOFCODE = 0;
 	inputfile >> SIZEOFCODE;
@@ -30,11 +31,20 @@ int main() {
 		inputfile >> hfmchar[i];
 		inputfile >> hfmweight[i];
 	}
+
 	//j建立HuffmanTree
-	HuffmanTree<char> huffmantree(SIZEOFCODE,hfmchar,hfmweight);
+	HuffmanTree<char> huffmantree(SIZEOFCODE, hfmchar, hfmweight);
 	huffmantree.treetoFile(hfmtree);
+	huffmantree.treetoCode(hfmcode);
+
+
+
+
+	//收尾
+
 	inputfile.close();
 	hfmtree.close();
+	hfmcode.close();
 	//system("pause");
 	return EXIT_SUCCESS;
 }

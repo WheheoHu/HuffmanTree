@@ -47,6 +47,18 @@ class HuffmanTree
 public:
 	HuffmanTree(int num_node, const T *hfmchar, const  int* hfmweight);
 	void treetoFile(fstream &hfmtreefile);
+	void treetoCode(fstream &hfmcode);
+
+private:
+	deque<HuffmanTreeNode<T> *> hfmforest;
+	HuffmanTreeNode<T> *root;
+private:
+
+	void treetoFile(HuffmanTreeNode<T> *cnode, fstream &hfmtreefile);
+	void treetoCode(HuffmanTreeNode<T> *cnode, fstream &hfmcode, string str);
+
+
+
 private:
 	//!!!!!!!!!!!!!!!!!!!!!!!!!!
 	//在类内声明比较函数需要静态!!
@@ -54,10 +66,6 @@ private:
 	static bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
 		return (treea->getweight()) < (treeb->getweight());
 	}
-	void treetoFile(HuffmanTreeNode<T> *cnode, fstream &hfmtreefile);
-	
-	deque<HuffmanTreeNode<T> *> hfmforest;
-	HuffmanTreeNode<T> *root;
 
 };
 
@@ -71,7 +79,7 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		hfmforest.push_front(ptr);
 	}
 	//建立HuffmanTree
-	while(hfmforest.size()>1)
+	while (hfmforest.size() > 1)
 	{
 		//cout << hfmforest[i] << " " << hfmforest[i]->getdata() << " " << hfmforest[i]->getweight() << endl;
 		sort(hfmforest.begin(), hfmforest.end(), compare);
@@ -87,7 +95,7 @@ inline HuffmanTree<T>::HuffmanTree(int num_node, const T * hfmchar, const int * 
 		hfmforest.push_back(pnewNode);
 	}
 	root = hfmforest.front();
-	cout << root->getweight() << endl;
+	//cout << root->getweight() << endl;
 
 }
 
@@ -98,17 +106,41 @@ inline void HuffmanTree<T>::treetoFile(fstream &hfmtreefile)
 }
 
 template<class T>
+inline void HuffmanTree<T>::treetoCode(fstream & hfmcode)
+{
+	treetoCode(root, hfmcode, "");
+}
+
+template<class T>
 inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream &hfmtreefile)
 {
-	if (cnode==NULL)
+	if (cnode == NULL)
 	{
-		exit(EXIT_SUCCESS);
+		return;
 	}
 	else
 	{
-		hfmtreefile << cnode->getdata() << " " << cnode->getweight()<<endl;
-		treetoFile(cnode->plchild,hfmtreefile);
+		hfmtreefile << cnode->getdata() << " " << cnode->getweight() << endl;
+		treetoFile(cnode->plchild, hfmtreefile);
 		treetoFile(cnode->prchild, hfmtreefile);
+	}
+}
+
+template<class T>
+inline void HuffmanTree<T>::treetoCode(HuffmanTreeNode<T>* cnode, fstream & hfmcode, string str)
+{
+	if (cnode == NULL)
+	{
+		return;
+	}
+	else
+	{
+		if (cnode->data != 0)
+		{
+			hfmcode << cnode->getdata() << " " << str << endl;
+		}
+		treetoCode(cnode->plchild, hfmcode, str + "0");
+		treetoCode(cnode->prchild, hfmcode, str + "1");
 	}
 }
 
