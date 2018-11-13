@@ -23,7 +23,7 @@ int main() {
 	tobetrans.open("tobetrans", ios::in);
 	hfmtree.open("hfmtree", ios::out);
 	hfmcode.open("hfmcode", ios::out);
-	codefile.open("codefile", ios::out||ios::in);
+	codefile.open("codefile", ios::out);
 	textfile.open("textfile", ios::out);
 
 	// ‰»Î
