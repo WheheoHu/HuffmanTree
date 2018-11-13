@@ -57,6 +57,6 @@ int main() {
 	textfile.close();
 	delete[] hfmchar;
 	delete[] hfmweight;
-	system("pause");
+	//system("pause");
 	return EXIT_SUCCESS;
 }
