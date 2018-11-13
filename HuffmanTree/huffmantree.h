@@ -199,7 +199,3 @@ inline void HuffmanTree<T>::treetoCode(HuffmanTreeNode<T>* cnode, fstream & hfmc
 		treetoCode(cnode->prchild, hfmcode, str + "1");
 	}
 }
-
-
-
-
