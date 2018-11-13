@@ -5,6 +5,7 @@
 #include <deque>
 #include <algorithm>
 #include <functional>
+#include <map>
 using namespace std;
 
 template<class T> class HuffmanTreeNode;
@@ -16,7 +17,7 @@ class HuffmanTreeNode
 {
 public:
 	friend class HuffmanTree<T>;
-	HuffmanTreeNode() :data(0), pparent(NULL), plchild(NULL), prchild(NULL) {}
+	HuffmanTreeNode() :data('#'), pparent(NULL), plchild(NULL), prchild(NULL) {}
 	HuffmanTreeNode(T d, int w) :pparent(NULL), plchild(NULL), prchild(NULL), data(d), weight(w) {}
 	T getdata()const;
 	int getweight()const;
@@ -48,6 +49,7 @@ public:
 	HuffmanTree(int num_node, const T *hfmchar, const  int* hfmweight);
 	void treetoFile(fstream &hfmtreefile);
 	void treetoCode(fstream &hfmcode);
+	void Encode(fstream &tobetrans, fstream &codefile);
 
 private:
 	deque<HuffmanTreeNode<T> *> hfmforest;
@@ -67,7 +69,7 @@ private:
 	static bool compare(HuffmanTreeNode<T> *treea, HuffmanTreeNode<T> *treeb) {
 		return (treea->getweight()) < (treeb->getweight());
 	}
-
+	map<T, string> codes;
 };
 
 template<class T>
@@ -113,6 +115,28 @@ inline void HuffmanTree<T>::treetoCode(fstream & hfmcode)
 }
 
 template<class T>
+inline void HuffmanTree<T>::Encode(fstream & tobetrans, fstream & codefile)
+{
+	string str;
+	tobetrans >> str;
+	const char *pctrans = str.c_str();
+
+	map<char, string>::iterator itr;
+
+	for (int i = 0; i < str.size(); i++)
+	{ 
+		for ( itr=codes.begin();  itr!=codes.end(); ++itr)
+		{
+			if (itr->first==*pctrans)
+			{
+				codefile << itr->second << " ";
+			}
+		}
+		pctrans++;
+	}
+}
+
+template<class T>
 inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream &hfmtreefile)
 {
 	if (cnode == NULL)
@@ -136,9 +160,10 @@ inline void HuffmanTree<T>::treetoCode(HuffmanTreeNode<T>* cnode, fstream & hfmc
 	}
 	else
 	{
-		if (cnode->data != 0)
+		if (cnode->data != '#')
 		{
 			hfmcode << cnode->getdata() << " " << str << endl;
+			codes.insert(pair<T, string>(cnode->getdata(), str));
 		}
 		treetoCode(cnode->plchild, hfmcode, str + "0");
 		treetoCode(cnode->prchild, hfmcode, str + "1");
