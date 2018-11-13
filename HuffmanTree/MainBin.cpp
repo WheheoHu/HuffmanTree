@@ -9,8 +9,6 @@
 //每次执行中不一定执行 I 命令，因为文件 hfmtree 可能早已建好。
 
 #include <fstream>
-#include <deque>
-#include<string>
 #include "huffmantree.h"
 
 using namespace std;
