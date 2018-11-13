@@ -124,12 +124,12 @@ inline void HuffmanTree<T>::Encode(fstream & tobetrans, fstream & codefile)
 	map<char, string>::iterator itr;
 
 	for (int i = 0; i < str.size(); i++)
-	{ 
-		for ( itr=codes.begin();  itr!=codes.end(); ++itr)
+	{
+		for (itr = codes.begin(); itr != codes.end(); ++itr)
 		{
-			if (itr->first==*pctrans)
+			if (itr->first == *pctrans)
 			{
-				codefile << itr->second << " ";
+				codefile << itr->second;
 			}
 		}
 		pctrans++;
