@@ -50,6 +50,7 @@ public:
 	void treetoFile(fstream &hfmtreefile);
 	void treetoCode(fstream &hfmcode);
 	void Encode(fstream &tobetrans, fstream &codefile);
+	void Decode(istream &codefilein, fstream &textfile);
 
 private:
 	deque<HuffmanTreeNode<T> *> hfmforest;
@@ -135,6 +136,16 @@ inline void HuffmanTree<T>::Encode(fstream & tobetrans, fstream & codefile)
 		pctrans++;
 	}
 }
+
+template<class T>
+inline void HuffmanTree<T>::Decode(istream & codefilein, fstream & textfile)
+{
+	string str;
+	codefilein >> str;
+	cout << str;
+}
+
+
 
 template<class T>
 inline void HuffmanTree<T>::treetoFile(HuffmanTreeNode<T>* cnode, fstream &hfmtreefile)

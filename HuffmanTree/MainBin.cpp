@@ -10,19 +10,21 @@
 
 #include <fstream>
 #include <deque>
+#include<string>
 #include "huffmantree.h"
 
 using namespace std;
 
 
 int main() {
-	fstream inputfile, tobetrans, hfmtree, hfmcode, codefile;
+	fstream inputfile, tobetrans, hfmtree, hfmcode, codefile,codefilein,textfile;
 	
 	inputfile.open("input", ios::in);
 	tobetrans.open("tobetrans", ios::in);
 	hfmtree.open("hfmtree", ios::out);
 	hfmcode.open("hfmcode", ios::out);
-	codefile.open("codefile", ios::out);
+	codefile.open("codefile", ios::out||ios::in);
+	textfile.open("textfile", ios::out);
 
 	// ‰»Î
 	int SIZEOFCODE = 0;
@@ -40,7 +42,7 @@ int main() {
 	huffmantree.treetoFile(hfmtree);
 	huffmantree.treetoCode(hfmcode);
 	huffmantree.Encode(tobetrans, codefile);
-
+	huffmantree.Decode(codefile, textfile);
 
 
 	// ’Œ≤
@@ -50,8 +52,10 @@ int main() {
 	hfmtree.close();
 	hfmcode.close();
 	codefile.close();
+	codefilein.close();
+	textfile.close();
 	delete[] hfmchar;
 	delete[] hfmweight;
-	//system("pause");
+	system("pause");
 	return EXIT_SUCCESS;
 }
