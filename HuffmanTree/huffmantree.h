@@ -142,7 +142,26 @@ inline void HuffmanTree<T>::Decode(istream & codefilein, fstream & textfile)
 {
 	string str;
 	codefilein >> str;
-	cout << str;
+	string ans = "";
+	HuffmanTreeNode<T> *p = root;
+	for (int i = 0; i < str.size(); i++)
+	{
+
+
+		if (str[i] == '0') {
+			p = p->plchild;
+		}
+		else
+		{
+			p = p->prchild;
+		}
+		if (p->plchild == NULL && p->prchild == NULL)
+		{
+			ans += p->getdata();
+			p = root;
+		}
+	}
+	textfile << ans;
 }
 
 

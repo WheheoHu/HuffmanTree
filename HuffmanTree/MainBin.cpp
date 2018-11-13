@@ -17,7 +17,7 @@ using namespace std;
 
 
 int main() {
-	fstream inputfile, tobetrans, hfmtree, hfmcode, codefile,codefilein,textfile;
+	fstream inputfile, tobetrans, hfmtree, hfmcode, codefile,textfile;
 	
 	inputfile.open("input", ios::in);
 	tobetrans.open("tobetrans", ios::in);
@@ -42,6 +42,8 @@ int main() {
 	huffmantree.treetoFile(hfmtree);
 	huffmantree.treetoCode(hfmcode);
 	huffmantree.Encode(tobetrans, codefile);
+	codefile.close();
+	codefile.open("codefile", ios::in);
 	huffmantree.Decode(codefile, textfile);
 
 
@@ -52,7 +54,6 @@ int main() {
 	hfmtree.close();
 	hfmcode.close();
 	codefile.close();
-	codefilein.close();
 	textfile.close();
 	delete[] hfmchar;
 	delete[] hfmweight;
