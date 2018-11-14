@@ -120,6 +120,14 @@
   <ItemGroup>
     <ClInclude Include="huffmantree.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="codefile" />
+    <None Include="hfmcode" />
+    <None Include="hfmtree" />
+    <None Include="input" />
+    <None Include="textfile" />
+    <None Include="tobetrans" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

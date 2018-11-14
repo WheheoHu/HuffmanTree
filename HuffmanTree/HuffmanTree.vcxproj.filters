@@ -15,13 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainBin.cpp">
-      <Filter>资源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="huffmantree.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainBin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="codefile">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="hfmcode">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="hfmtree">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="input">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="textfile">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="tobetrans">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>
